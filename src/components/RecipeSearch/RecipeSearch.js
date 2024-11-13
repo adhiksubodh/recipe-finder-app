@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import Search from './SearchForm';
+import SearchForm from './SearchForm';
 import RecipeList from './RecipeList';
 import './RecipeSearch.scss';
 
-const RecipeSearch = () => {
-    const [recipes, setRecipes] = useState=([]);
+const RecipeSearch = ({ onSearch }) => {
+    const [recipes, setRecipes] = useState([]);
 
     const handleSearch = async (query) => {
         //fetch recipes from api and update state
-        const fetchedRecipes = await searchRecipes(query);
-        setRecipes(fetchedRecipes.results); 
+        const fetchedRecipes = await onSearch(query);
+        setRecipes(fetchedRecipes); 
        };
+
        return(
         <div className='recipe-search'>
             <SearchForm onSearch={handleSearch}/>
